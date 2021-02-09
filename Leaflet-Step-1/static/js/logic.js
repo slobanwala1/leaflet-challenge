@@ -78,18 +78,14 @@ d3.json(api, function(data) {
   mapLegend.onAdd = function() {
     var div = L.DomUtil.create("div", "info legend");
 
-    var grades = [0, 1, 2, 3, 4, 5];
+    // Magnitude grades and associated colors
+    var magGrades = [0, 1, 2, 3, 4, 5];
 
-    var colors = ["#98ee00",
-        "#d4ee00",
-        "#eecc00",
-        "#ee9c00",
-        "#ea822c",
-        "#ea2c2c"];
+    var magColors = ["#98ee00", "#d4ee00", "#eecc00", "#ee9c00", "#ea822c", "#ea2c2c"];
 
-    for(var i = 0; i < grades.length; i++) {
-      div.innerHTML += "<i style='background: " + colors[i] + "'></i> " +
-      grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
+    for(var i = 0; i < magGrades.length; i++) {
+      div.innerHTML += "<i style='background: " + magColors[i] + "'></i> " +
+      magGrades[i] + (magGrades[i + 1] ? "&ndash;" + magGrades[i + 1] + "<br>" : "+");
     }
     return div;
   };
