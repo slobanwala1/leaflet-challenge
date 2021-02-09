@@ -24,11 +24,11 @@ var api = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.ge
 
 d3.json(api, function(data) {
   // fill the circles with color and how big the radius is based on data returned.
-  function styleMap(feature) {
+  function styleMap(mapFeature) {
     return {
-      fillColor: styleColor(feature.properties.mag),
+      fillColor: styleColor(mapFeature.properties.mag),
       color: "#000000",
-      radius: styleRadius(feature.properties.mag),
+      radius: styleRadius(mapFeature.properties.mag),
       stroke: true,
       weight: 0.5,
       opacity: 1,
