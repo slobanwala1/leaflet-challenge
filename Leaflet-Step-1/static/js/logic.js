@@ -76,7 +76,7 @@ d3.json(api, function(data) {
   });
 
   mapLegend.onAdd = function() {
-    var div = L.DomUtil.create("div", "info legend");
+    var div = L.DomUtil.create("div", "legend");
 
     // Magnitude grades and associated colors
     var magGrades = [0, 1, 2, 3, 4, 5];
