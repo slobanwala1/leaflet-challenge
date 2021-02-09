@@ -32,4 +32,5 @@ these to be handled. Next is understanding how the API works with our mapbox cre
 is used to generate the full map/background map, and the API for earthquakes is used in the d3 portion to read the JSON in. With all these pieces the puzzle
 was finally forming and as they fell in place, the homework became more tangible and easier to visualize and understand. The legend was easy to setup but getting
 the colors to display with each value its designated was a little tough until stack overflow helped with using the CSS for that. Thank you for letting us work with such vibrant JS libraries to see such cool maps and legends in action. Sadly I couldn't get part 2 finished. The second map would cause the first ones data points
-to disappear, as it was laying over it.
+to disappear, as it was laying over it. Then I was getting console errors so I tried to look at stack overflow but did not have enough time to get it working for this
+homework.
