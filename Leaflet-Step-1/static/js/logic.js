@@ -19,10 +19,10 @@ L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   your_access_token: API_KEY
 }).addTo(initMap);
 
-// earthquake API, based on personal preference
-var api = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+// EQ API, based on personal preference
+var eq_api = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
 
-d3.json(api, function(data) {
+d3.json(eq_api, function(data) {
   // fill the circles with color and how big the radius is based on data returned.
   function styleMap(mapFeature) {
     return {
@@ -36,7 +36,7 @@ d3.json(api, function(data) {
     };
   }
 
-  //
+  // Colors based on the EQ magnitude level
   function styleColor(mapFeatureMag) {
     if (mapFeatureMag > 5) {
       // red
@@ -66,6 +66,7 @@ d3.json(api, function(data) {
     return mag * 3.5;
   }
 
+  // create the layers by calling the functions and adding it to the geojson map object.
   L.geoJson(data, {
     pointToLayer: function(feature, latlng) {
       return L.circleMarker(latlng);
@@ -74,8 +75,7 @@ d3.json(api, function(data) {
     style: styleMap,
 
     onEachFeature: function(feature, layer) {
-      layer.bindPopup("Mag: " + feature.properties.mag + "<br>Loc: " +
-      feature.properties.place);
+      layer.bindPopup("EQ Magnitude: " + feature.properties.mag + "<br>EQ Location: " + feature.properties.place);
     }
   }).addTo(initMap);
 
@@ -91,9 +91,9 @@ d3.json(api, function(data) {
 
     var magColors = ["#2cc8eb", "#00bf80", "#32cd32", "#ffff00", "#ffa500", "#ff0000"];
 
+    // Applying the legend colors to each section
     for(var i = 0; i < magGrades.length; i++) {
-      div.innerHTML += "<i style='background: " + magColors[i] + "'></i> " +
-      magGrades[i] + (magGrades[i + 1] ? "&ndash;" + magGrades[i + 1] + "<br>" : "+");
+      div.innerHTML += "<i style='background: " + magColors[i] + "'></i> " + magGrades[i] + (magGrades[i + 1] ? "&ndash;" + magGrades[i + 1] + "<br>" : "+");
     }
     return div;
   };
