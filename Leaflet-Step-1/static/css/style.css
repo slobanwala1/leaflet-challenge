@@ -9,15 +9,18 @@ html {
   height: 100%;
 }
 
+/* legend manipulation to show the bars */
 .legend {
   padding: 10px;
   line-height: 18px;
   color: gray;
+  /* outer layer of legend */
   background-color: white;
   border-radius: 5px;
 }
 
 .legend i {
+  /* The color bar for magnitude */
   float: left;
   width: 18px;
   height: 18px;
