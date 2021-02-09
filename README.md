@@ -33,4 +33,5 @@ is used to generate the full map/background map, and the API for earthquakes is 
 was finally forming and as they fell in place, the homework became more tangible and easier to visualize and understand. The legend was easy to setup but getting
 the colors to display with each value its designated was a little tough until stack overflow helped with using the CSS for that. Thank you for letting us work with such vibrant JS libraries to see such cool maps and legends in action. Sadly I couldn't get part 2 finished. The second map would cause the first ones data points
 to disappear, as it was laying over it. Then I was getting console errors so I tried to look at stack overflow but did not have enough time to get it working for this
-homework.
+homework. if we have time in the last few weeks to go back on the homework I'd definitely want to do part two for this as that was really interesting to add layer
+controls and see the different map views by handling it through the display dropdown.
