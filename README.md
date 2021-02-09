@@ -13,7 +13,7 @@ Instructor readme link:
 
 # https://github.com/slobanwala1/leaflet-challenge/blob/main/Leaflet-Step-1%20and%20Leaflet-Step-2/README.md
 
-Here is a few pics of part 1 fully working:
+Here is a few pics of Leaflet-Step-1 fully working:
 
 **Img 1**
 
