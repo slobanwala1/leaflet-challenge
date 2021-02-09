@@ -10,3 +10,89 @@ var initMap = L.map("map", {
 });
 
 // map tile layer(the background)
+L.tileLayer("https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={your_access_token}", {
+  attribution: "© <a href='https://www.mapbox.com/about/maps/'>Mapbox</a> © <a href='http://www.openstreetmap.org/copyright'>OpenStreetMap</a> <strong><a href='https://www.mapbox.com/map-feedback/' target='_blank'>Improve this map</a></strong>",
+  tileSize: 512,
+  maxZoom: 18,
+  zoomOffset: -1,
+  id: "mapbox/streets-v11",
+  your_access_token: API_KEY
+}).addTo(initMap);
+
+// earthquake API
+var api = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson";
+
+d3.json(api, function(data) {
+  function styleMap(feature) {
+    return {
+      opacity: 1,
+      fillOpacity: 1,
+      fillColor: styleColor(feature.properties.mag),
+      color: "#000000",
+      radius: styleRadius(feature.properties.mag),
+      stroke: true,
+      weight: 0.5
+    };
+  }
+
+  function styleColor(mapFeatureMag) {
+    if (mapFeatureMag > 5) {
+      return "#ea2c2c";
+    } else if(mapFeatureMag > 4) {
+      return "#eaa92c";
+    } else if(mapFeatureMag > 3) {
+      return "#d5ea2c";
+    } else if(mapFeatureMag > 2) {
+      return "#92ea2c";
+    } else if(mapFeatureMag > 1) {
+      return "#2ceabf";
+    } else {
+      return "#2c99ea";
+    }
+  }
+
+  function styleRadius(mag) {
+    if (mag === 0) {
+      return 1;
+    }
+    return mag * 3.5;
+  }
+
+  L.geoJson(data, {
+    pointToLayer: function(feature, latlng) {
+      return L.circleMarker(latlng);
+    },
+
+    style: styleMap,
+
+    onEachFeature: function(feature, layer) {
+      layer.bindPopup("Mag: " + feature.properties.mag + "<br>Loc: " +
+      feature.properties.place);
+    }
+  }).addTo(initMap);
+
+  var mapLegend = L.control({
+    position: "bottomright"
+  });
+
+  mapLegend.onAdd = function() {
+    var div = L.DomUtil.create("div", "info legend");
+
+    var grades = [0, 1, 2, 3, 4, 5];
+
+    var colors = ["#98ee00",
+        "#d4ee00",
+        "#eecc00",
+        "#ee9c00",
+        "#ea822c",
+        "#ea2c2c"];
+
+    for(var i = 0; i < grades.length; i++) {
+      div.innerHTML += "<i style='background: " + colors[i] + "'></i> " +
+      grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
+    }
+    return div;
+  };
+
+  mapLegend.addTo(initMap);
+});
